@@ -9,15 +9,10 @@ interface GameProp {
   results: ResultProps[];
 }
 
-interface ResultProps {
+export interface ResultProps {
   id: number;
-  slug: string;
   name: string;
-  released: string;
-  tba: boolean;
   background_image: string;
-  rating: number;
-  playtime: number;
 }
 function useGame() {
   const [games, setGames] = useState<ResultProps[]>([]);
