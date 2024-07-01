@@ -10,6 +10,7 @@ interface GameProp {
 }
 
 export interface ResultProp {
+  metacritic: number;
   id: number;
   name: string;
   background_image: string;
