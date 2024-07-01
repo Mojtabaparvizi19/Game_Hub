@@ -6,16 +6,24 @@ interface GameProp {
   count: number;
   next: string;
   previous: string;
-  results: ResultProps[];
+  results: ResultProp[];
 }
 
-export interface ResultProps {
+export interface ResultProp {
   id: number;
   name: string;
   background_image: string;
+  parent_platforms: { platform: ParentProps }[];
 }
+
+export interface ParentProps {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 function useGame() {
-  const [games, setGames] = useState<ResultProps[]>([]);
+  const [games, setGames] = useState<ResultProp[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
