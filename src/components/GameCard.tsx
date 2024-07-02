@@ -11,7 +11,7 @@ interface Props {
 function GameCard({ game }: Props) {
   return (
     <>
-      <Card margin={"20px"} borderRadius={10} overflow="hidden">
+      <Card>
         <Image src={imageUrl(game.background_image)} />
         <CardBody>
           <Heading textAlign="center" fontSize={15}>
