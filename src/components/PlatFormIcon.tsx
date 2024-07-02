@@ -1,4 +1,4 @@
-import { HStack, Icon } from "@chakra-ui/react";
+import { HStack, Icon, Badge } from "@chakra-ui/react";
 import { ParentProps } from "../hooks/useGame";
 import {
   FaWindows,
@@ -32,9 +32,23 @@ function PlatFormIcon({ platforms }: Props) {
   };
   return (
     <HStack marginY={2}>
-      {platforms.map(({ platform }) => (
-        <Icon key={platform.id} color={"gray.500"} as={icons[platform.slug]} />
-      ))}
+      <Badge
+        colorScheme="gray.50"
+        width={"auto"}
+        height={"auto"}
+        padding={2}
+        borderRadius={4}
+      >
+        {platforms.map(({ platform }) => (
+          <Icon
+            margin={1}
+            boxSize={4}
+            key={platform.id}
+            color={"gray.500"}
+            as={icons[platform.slug]}
+          />
+        ))}
+      </Badge>
     </HStack>
   );
 }

@@ -26,22 +26,25 @@ export interface ParentProps {
 function useGame() {
   const [games, setGames] = useState<ResultProp[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const controller = new AbortController();
-
     apiClient
       .get<GameProp>("/games", { signal: controller.signal })
       .then((res) => {
         setGames(res.data.results);
+        setLoading(false);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
+        setLoading(false);
       });
     return () => controller.abort();
   }, []);
-  return { games, error, setGames, setError };
+  return { games, error, isLoading };
 }
 
 export default useGame;
