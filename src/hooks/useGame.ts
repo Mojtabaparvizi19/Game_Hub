@@ -1,13 +1,4 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/apiClient";
-import { CanceledError } from "axios";
-
-interface GameProp {
-  count: number;
-  next: string;
-  previous: string;
-  results: ResultProp[];
-}
+import useData from "./useData";
 
 export interface ResultProp {
   metacritic: number;
@@ -24,27 +15,8 @@ export interface ParentProps {
 }
 
 function useGame() {
-  const [games, setGames] = useState<ResultProp[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const controller = new AbortController();
-    apiClient
-      .get<GameProp>("/games", { signal: controller.signal })
-      .then((res) => {
-        setGames(res.data.results);
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-        setLoading(false);
-      });
-    return () => controller.abort();
-  }, []);
-  return { games, error, isLoading };
+  const { data, error, isLoading } = useData<ResultProp>("/games");
+  return { data, error, isLoading };
 }
 
 export default useGame;

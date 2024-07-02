@@ -7,7 +7,7 @@ interface Props {
 
 function StyleBox({ children }: Props) {
   return (
-    <Box overflow={"hidden"} borderRadius={"10px"} width={"300px"}>
+    <Box overflow={"hidden"} borderRadius={"10px"}>
       {children}
     </Box>
   );

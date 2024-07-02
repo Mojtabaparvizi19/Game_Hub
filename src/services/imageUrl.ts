@@ -5,7 +5,6 @@ function imageUrl(url: string) {
     url.slice(0, index + "media/".length) +
     cropUrlAddress +
     url.slice(index + "media/".length, url.length);
-  console.log(newUrl);
 
   return newUrl;
 }
