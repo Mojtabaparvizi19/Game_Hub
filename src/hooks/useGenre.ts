@@ -8,9 +8,9 @@ export interface GenreResultProps {
 }
 
 function useGenre() {
-  const { data } = useData<GenreResultProps>("/genres");
+  const { data, isLoading, error } = useData<GenreResultProps>("/genres");
 
-  return { data };
+  return { data, isLoading, error };
 }
 
 export default useGenre;
