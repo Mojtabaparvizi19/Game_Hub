@@ -1,5 +1,6 @@
 import useData from "./useData";
 import { GenreResultProps } from "./useGenre";
+import { PlatformProp } from "./usePlatform";
 
 export interface ResultProp {
   metacritic: number;
@@ -15,15 +16,19 @@ export interface ParentProps {
   slug: string;
 }
 
-function useGame(selectedGenre: GenreResultProps | null) {
+function useGame(
+  selectedGenre: GenreResultProps | null,
+  selectPlatform: PlatformProp | null
+) {
   const { data, error, isLoading } = useData<ResultProp>(
     "/games",
     {
       params: {
+        parent_platforms: selectPlatform?.id,
         genres: selectedGenre?.id,
       },
     },
-    [selectedGenre?.id]
+    [selectedGenre?.id, selectPlatform?.id]
   );
   return { data, error, isLoading };
 }
