@@ -1,9 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import useGenre from "../hooks/useGenre";
 import GenreDiv from "./GenreDiv";
 
 function GenreGrid() {
-  const { data } = useGenre();
   return (
     <>
       <SimpleGrid
@@ -13,7 +11,7 @@ function GenreGrid() {
           md: 1,
         }}
       >
-        <GenreDiv genres={data} />
+        <GenreDiv />
       </SimpleGrid>
     </>
   );
