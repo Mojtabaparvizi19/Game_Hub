@@ -6,11 +6,11 @@ import StyleBox from "./StyleBox";
 import { GenreResultProps } from "../hooks/useGenre";
 
 interface Props {
-  filteringGenre: GenreResultProps | null;
+  selectedGenre: GenreResultProps | null;
 }
 
-function GameGrid({ filteringGenre }: Props) {
-  const { error, data, isLoading } = useGame(filteringGenre);
+function GameGrid({ selectedGenre }: Props) {
+  const { error, data, isLoading } = useGame(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <>
@@ -24,7 +24,7 @@ function GameGrid({ filteringGenre }: Props) {
           xl: 3,
           "2xl": 4,
         }}
-        spacing={5}
+        spacing={3}
       >
         {isLoading &&
           skeletons.map((item) => (

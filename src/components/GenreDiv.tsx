@@ -4,9 +4,10 @@ import useGenre, { GenreResultProps } from "../hooks/useGenre";
 
 interface Props {
   handleGenre: (genre: GenreResultProps) => void;
+  selectedGenre: GenreResultProps | null;
 }
 
-function GenreDiv({ handleGenre }: Props) {
+function GenreDiv({ selectedGenre, handleGenre }: Props) {
   const { data, isLoading, error } = useGenre();
 
   return (
@@ -27,13 +28,19 @@ function GenreDiv({ handleGenre }: Props) {
             />
             <ListItem
               cursor={"pointer"}
-              onClick={() => {
-                handleGenre(genre);
-              }}
+              onClick={() => handleGenre(genre)}
               paddingY={"10px"}
               key={genre.id}
             >
-              <Text fontSize={"15px"}>{genre.name}</Text>
+              <Text
+                borderRadius={5}
+                width={"auto"}
+                padding={0.5}
+                bgColor={genre.id === selectedGenre?.id ? "gray.500" : "none"}
+                fontSize={"15px"}
+              >
+                {genre.name}
+              </Text>
             </ListItem>
           </HStack>
         ))}

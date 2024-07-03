@@ -4,9 +4,10 @@ import { GenreResultProps } from "../hooks/useGenre";
 
 interface Props {
   shareGenre: (genre: GenreResultProps) => void;
+  selectedGenre: GenreResultProps | null;
 }
 
-function GenreGrid({ shareGenre }: Props) {
+function GenreGrid({ selectedGenre, shareGenre }: Props) {
   return (
     <>
       <SimpleGrid
@@ -16,7 +17,7 @@ function GenreGrid({ shareGenre }: Props) {
           md: 1,
         }}
       >
-        <GenreDiv handleGenre={shareGenre} />
+        <GenreDiv selectedGenre={selectedGenre} handleGenre={shareGenre} />
       </SimpleGrid>
     </>
   );

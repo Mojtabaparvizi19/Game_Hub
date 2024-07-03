@@ -27,13 +27,14 @@ function App() {
         </GridItem>
 
         <GridItem area={"main"}>
-          <GameGrid filteringGenre={chosenGenre} />
+          <GameGrid selectedGenre={chosenGenre} />
         </GridItem>
 
         <Show above="lg">
           <GridItem padding={6} area={"side"}>
             <GenreGrid
-              shareGenre={(genre: GenreResultProps) => setChosenGenre(genre)}
+              selectedGenre={chosenGenre}
+              shareGenre={(genre) => setChosenGenre(genre)}
             />
           </GridItem>
         </Show>
