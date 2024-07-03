@@ -14,11 +14,11 @@ import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 
-interface Props {
+interface PlatFormProps {
   platforms: { platform: ParentProps }[];
 }
 
-function PlatFormIcon({ platforms }: Props) {
+function PlatFormIcon({ platforms }: PlatFormProps) {
   const icons: { [key: string]: IconType } = {
     pc: FaWindows,
     playstation: FaPlaystation,
