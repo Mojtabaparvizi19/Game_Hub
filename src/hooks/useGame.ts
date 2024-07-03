@@ -1,4 +1,5 @@
 import useData from "./useData";
+import { GenreResultProps } from "./useGenre";
 
 export interface ResultProp {
   metacritic: number;
@@ -14,8 +15,16 @@ export interface ParentProps {
   slug: string;
 }
 
-function useGame() {
-  const { data, error, isLoading } = useData<ResultProp>("/games");
+function useGame(selectedGenre: GenreResultProps | null) {
+  const { data, error, isLoading } = useData<ResultProp>(
+    "/games",
+    {
+      params: {
+        genres: selectedGenre?.id,
+      },
+    },
+    [selectedGenre?.id]
+  );
   return { data, error, isLoading };
 }
 

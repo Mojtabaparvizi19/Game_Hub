@@ -3,8 +3,14 @@ import useGame from "../hooks/useGame";
 import GameCard from "./GameCard";
 import LoadSkeleton from "./LoadSkeleton";
 import StyleBox from "./StyleBox";
-function GameGrid() {
-  const { error, data, isLoading } = useGame();
+import { GenreResultProps } from "../hooks/useGenre";
+
+interface Props {
+  filteringGenre: GenreResultProps | null;
+}
+
+function GameGrid({ filteringGenre }: Props) {
+  const { error, data, isLoading } = useGame(filteringGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <>

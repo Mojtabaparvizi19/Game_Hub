@@ -1,7 +1,12 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import GenreDiv from "./GenreDiv";
+import { GenreResultProps } from "../hooks/useGenre";
 
-function GenreGrid() {
+interface Props {
+  shareGenre: (genre: GenreResultProps) => void;
+}
+
+function GenreGrid({ shareGenre }: Props) {
   return (
     <>
       <SimpleGrid
@@ -11,7 +16,7 @@ function GenreGrid() {
           md: 1,
         }}
       >
-        <GenreDiv />
+        <GenreDiv handleGenre={shareGenre} />
       </SimpleGrid>
     </>
   );
