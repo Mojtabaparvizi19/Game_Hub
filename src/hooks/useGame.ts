@@ -7,6 +7,7 @@ export interface ResultProp {
   name: string;
   background_image: string;
   parent_platforms: { platform: ParentProps }[];
+  rating_top: number;
 }
 
 export interface ParentProps {
