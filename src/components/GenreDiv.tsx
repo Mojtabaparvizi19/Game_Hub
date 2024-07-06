@@ -1,4 +1,12 @@
-import { List, ListItem, Text, HStack, Image, Spinner } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  Text,
+  HStack,
+  Image,
+  Spinner,
+  Heading,
+} from "@chakra-ui/react";
 import imageUrl from "../services/imageUrl";
 import useGenre, { GenreResultProps } from "../hooks/useGenre";
 
@@ -12,7 +20,10 @@ function GenreDiv({ selectedGenre, handleGenre }: Props) {
 
   return (
     <div>
-      <List>
+      <Heading fontSize={"20px"} marginTop={"90px"} as={"h3"}>
+        Genres
+      </Heading>
+      <List marginTop={5}>
         {error && (
           <ListItem>
             <Text>{error}</Text>
@@ -22,6 +33,7 @@ function GenreDiv({ selectedGenre, handleGenre }: Props) {
         {data.map((genre) => (
           <HStack key={genre.id}>
             <Image
+              objectFit={"cover"}
               borderRadius={"5px"}
               boxSize={"35px"}
               src={imageUrl(genre.image_background)}
