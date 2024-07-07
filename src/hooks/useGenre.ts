@@ -1,4 +1,4 @@
-import useData from "./useData";
+import genre from "../data/genre";
 
 export interface GenreResultProps {
   id: number;
@@ -8,7 +8,11 @@ export interface GenreResultProps {
 }
 
 function useGenre() {
-  const { data, isLoading, error } = useData<GenreResultProps>("/genres");
+  const { data, isLoading, error } = {
+    data: genre,
+    isLoading: false,
+    error: null,
+  };
 
   return { data, isLoading, error };
 }
