@@ -18,7 +18,7 @@ function Pltaform({ handlePlatform }: Props) {
           {platformName}
         </MenuButton>
         <MenuList>
-          {data.map((each) => (
+          {data?.results.map((each) => (
             <MenuItem
               onClick={() => {
                 handlePlatform(each);

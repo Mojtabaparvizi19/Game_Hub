@@ -26,11 +26,11 @@ function GenreDiv({ selectedGenre, handleGenre }: Props) {
       <List marginTop={5}>
         {error && (
           <ListItem>
-            <Text>{error}</Text>
+            <Text>{error.message}</Text>
           </ListItem>
         )}
         {isLoading && <Spinner />}
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <HStack key={genre.id}>
             <Image
               objectFit={"cover"}
