@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "../services/apiClient";
-import { DataProps } from "../services/apiClient";
 import genre from "../data/genre";
+import ApiRequest from "../services/apiClient";
 
 export interface GenreResultProps {
   id: number;
@@ -9,17 +8,12 @@ export interface GenreResultProps {
   slug: string;
   image_background: string;
 }
+const request = new ApiRequest<GenreResultProps>("/genres").get();
 
 function useGenre() {
-  const { data, isLoading, error } = useQuery<
-    DataProps<GenreResultProps>,
-    Error
-  >({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["genres"],
-    queryFn: () =>
-      apiClient
-        .get<DataProps<GenreResultProps>>("/genres")
-        .then((res) => res.data),
+    queryFn: () => request,
     staleTime: 24 * 60 * 60 * 1000, // 24h
     initialData: { count: genre.length, results: genre },
   });

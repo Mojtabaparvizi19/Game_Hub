@@ -1,20 +1,17 @@
-import apiClient from "../services/apiClient";
 import { useQuery } from "@tanstack/react-query";
-import { DataProps } from "../services/apiClient";
+import ApiRequest from "../services/apiClient";
 
 export interface PlatformProp {
   id: number;
   name: string;
   slug: string;
 }
+const request = new ApiRequest<PlatformProp>("/platforms/lists/parents").get();
 
 function usePlatform() {
-  const { data, error, isLoading } = useQuery<DataProps<PlatformProp>, Error>({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["platform"],
-    queryFn: () =>
-      apiClient
-        .get<DataProps<PlatformProp>>("/platforms/lists/parents")
-        .then((res) => res.data),
+    queryFn: () => request,
     staleTime: 24 * 60 * 60 * 1000,
   });
 

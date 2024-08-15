@@ -1,7 +1,7 @@
-import { DataProps } from "../services/apiClient";
 import { GameQuery } from "../App";
-import { useQuery } from "@tanstack/react-query";
-import apiClient from "../services/apiClient";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import ApiRequest from "../services/apiClient";
+import { DataProps } from "../services/apiClient";
 
 export interface ResultProp {
   metacritic: number;
@@ -17,36 +17,40 @@ export interface ParentProps {
   name: string;
   slug: string;
 }
-
+const request = new ApiRequest<ResultProp>("/games");
 function useGame(gameQuery: GameQuery) {
-  // const { data, error, isLoading } = useData<ResultProp>(
-  //   "/games",
-  //   {
-  //     params: {
-  //       parent_platforms: gameQuery.platform?.id,
-  //       genres: gameQuery.genre?.id,
-  //       ordering: gameQuery.ordering,
-  //       search: gameQuery.input,
-  //     },
-  //   },
-  //   [gameQuery]
-  // );
-
-  const { data, error, isLoading } = useQuery<DataProps<ResultProp>, Error>({
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery<DataProps<ResultProp>, Error>({
     queryKey: ["games", gameQuery],
-    queryFn: () =>
-      apiClient
-        .get<DataProps<ResultProp>>("/games", {
-          params: {
-            parent_platforms: gameQuery.platform?.id,
-            genres: gameQuery.genre?.id,
-            ordering: gameQuery.ordering,
-            search: gameQuery.input,
-          },
-        })
-        .then((res) => res.data),
+    queryFn: ({ pageParam = 1 }) =>
+      request.get({
+        params: {
+          parent_platforms: gameQuery.platform?.id,
+          genres: gameQuery.genre?.id,
+          ordering: gameQuery.ordering,
+          search: gameQuery.input,
+          page: pageParam,
+        },
+      }),
+
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
+    },
   });
-  return { data, error, isLoading };
+  return {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  };
 }
 
 export default useGame;
