@@ -19,38 +19,24 @@ export interface ParentProps {
 }
 const request = new ApiRequest<ResultProp>("/games");
 function useGame(gameQuery: GameQuery) {
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery<DataProps<ResultProp>, Error>({
-    queryKey: ["games", gameQuery],
-    queryFn: ({ pageParam = 1 }) =>
-      request.get({
-        params: {
-          parent_platforms: gameQuery.platform?.id,
-          genres: gameQuery.genre?.id,
-          ordering: gameQuery.ordering,
-          search: gameQuery.input,
-          page: pageParam,
-        },
-      }),
-
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.next ? allPages.length + 1 : undefined;
-    },
-  });
-  return {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  };
+  const { data, error, isLoading, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery<DataProps<ResultProp>, Error>({
+      queryKey: ["games", gameQuery],
+      queryFn: ({ pageParam = 1 }) =>
+        request.get({
+          params: {
+            parent_platforms: gameQuery.platform?.id,
+            genres: gameQuery.genre?.id,
+            ordering: gameQuery.ordering,
+            search: gameQuery.input,
+            page: pageParam,
+          },
+        }),
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.next ? allPages.length + 1 : undefined;
+      },
+    });
+  return { data, error, isLoading, isFetchingNextPage, fetchNextPage };
 }
 
 export default useGame;

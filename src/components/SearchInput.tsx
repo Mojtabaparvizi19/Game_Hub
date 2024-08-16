@@ -20,6 +20,7 @@ function SearchInput({ handleSearch }: Props) {
       <InputGroup>
         <InputLeftElement children={<BsSearch />} />
         <Input
+          bg={"gray.600"}
           ref={ref}
           borderRadius={20}
           placeholder="Search Games..."

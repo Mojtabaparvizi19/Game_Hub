@@ -18,15 +18,15 @@ function Pltaform({ handlePlatform }: Props) {
           {platformName}
         </MenuButton>
         <MenuList>
-          {data?.results.map((each) => (
+          {data?.results.map((eachPlatform) => (
             <MenuItem
               onClick={() => {
-                handlePlatform(each);
-                setPlatformName(each.name);
+                handlePlatform(eachPlatform);
+                setPlatformName(eachPlatform.name);
               }}
-              key={each.id}
+              key={eachPlatform.id}
             >
-              {each.name}
+              {eachPlatform.name}
             </MenuItem>
           ))}
         </MenuList>
