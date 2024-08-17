@@ -4,10 +4,10 @@ import { BsChevronDown } from "react-icons/bs";
 import { useState } from "react";
 
 interface Props {
-  handlePlatform: (platform: PlatformProp) => void;
+  selectPlatformFun: (platform: PlatformProp) => void;
 }
 
-function Pltaform({ handlePlatform }: Props) {
+function Pltaform({ selectPlatformFun }: Props) {
   const { data, error } = usePlatform();
   const [platformName, setPlatformName] = useState("Platforms");
   if (error) return null;
@@ -21,7 +21,7 @@ function Pltaform({ handlePlatform }: Props) {
           {data?.results.map((eachPlatform) => (
             <MenuItem
               onClick={() => {
-                handlePlatform(eachPlatform);
+                selectPlatformFun(eachPlatform);
                 setPlatformName(eachPlatform.name);
               }}
               key={eachPlatform.id}

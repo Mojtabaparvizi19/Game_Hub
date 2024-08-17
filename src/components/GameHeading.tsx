@@ -1,14 +1,14 @@
 import { Heading } from "@chakra-ui/react";
 import { GameQuery } from "../App";
+import useLookUp from "../hooks/useLookUp";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 function GameHeading({ gameQuery }: Props) {
-  const heading = `${gameQuery.platform?.name || ""} ${
-    gameQuery.genre?.name || ""
-  } Games`;
+  const { genre, platform } = useLookUp({ gameQuery });
+  const heading = `${platform?.id || ""} ${genre?.name || ""} Games`;
   return (
     <>
       <Heading paddingLeft={5} marginBottom={5} as={"h2"}>

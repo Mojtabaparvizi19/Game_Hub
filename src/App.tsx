@@ -3,28 +3,23 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreGrid from "./components/GenreGrid";
 import { useState } from "react";
-import { GenreResultProps } from "./hooks/useGenre";
 import Platform from "./components/Pltaform";
 import { PlatformProp } from "./hooks/usePlatform";
 import Sort from "./components/Sort";
 import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
-  genre: GenreResultProps | null;
-  platform: PlatformProp | null;
+  genreId: number | null;
+  platformId: number | null;
   ordering: string;
   input: string;
 }
 
 function App() {
-  // const [chosenGenre, setChosenGenre] = useState<GenreResultProps | null>(null);
-  // const [selectedPlatform, setPlatform] = useState<PlatformProp | null>(null);
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
   return (
     <>
       <Grid
-        // justifyContent={"center"}
         templateAreas={{
           base: `"nav" "main"`,
 
@@ -44,9 +39,8 @@ function App() {
           <GameHeading gameQuery={gameQuery} />
           <HStack>
             <Platform
-              handlePlatform={(platform: PlatformProp) => {
-                // setPlatform(platform);
-                setGameQuery({ ...gameQuery, platform });
+              selectPlatformFun={(platform: PlatformProp) => {
+                setGameQuery({ ...gameQuery, platformId: platform.id });
               }}
             />
             <Sort
@@ -62,8 +56,10 @@ function App() {
         <Show above="lg">
           <GridItem padding={6} area={"side"}>
             <GenreGrid
-              selectedGenre={gameQuery.genre}
-              shareGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+              selectedGenreId={gameQuery.genreId}
+              shareGenre={(genre) =>
+                setGameQuery({ ...gameQuery, genreId: genre.id })
+              }
             />
           </GridItem>
         </Show>

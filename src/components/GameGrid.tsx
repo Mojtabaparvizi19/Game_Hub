@@ -1,21 +1,26 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
 import GameCard from "./GameCard";
 import LoadSkeleton from "./LoadSkeleton";
 import StyleBox from "./StyleBox";
-import { GameQuery } from "../App";
-import { Button, Spinner } from "@chakra-ui/react";
-import React from "react";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 function GameGrid({ gameQuery }: Props) {
-  const { data, error, isLoading, isFetchingNextPage, fetchNextPage } =
-    useGame(gameQuery);
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useGame(gameQuery);
 
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
       {error && <Text>{error.message}</Text>}
@@ -47,18 +52,17 @@ function GameGrid({ gameQuery }: Props) {
           </React.Fragment>
         ))}
       </SimpleGrid>
-      <Button
-        onClick={() => fetchNextPage()}
-        marginBottom={5}
-        marginLeft={5}
-        width={"100px"}
-      >
-        {isFetchingNextPage ? (
-          <Spinner size={"md"} color="gray.500" />
-        ) : (
-          "Load More"
-        )}
-      </Button>
+
+      {hasNextPage && (
+        <Button
+          onClick={() => fetchNextPage()}
+          marginBottom={5}
+          marginLeft={5}
+          width={"100px"}
+        >
+          {isFetchingNextPage ? <Spinner size={"md"} /> : "Load More"}
+        </Button>
+      )}
     </>
   );
 }

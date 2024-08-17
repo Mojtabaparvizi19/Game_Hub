@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ApiRequest from "../services/apiClient";
+import ms from "ms";
 
 export interface PlatformProp {
   id: number;
@@ -12,7 +13,7 @@ function usePlatform() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["platform"],
     queryFn: () => request,
-    staleTime: 24 * 60 * 60 * 1000,
+    staleTime: ms("24h"),
   });
 
   return { data, error, isLoading };

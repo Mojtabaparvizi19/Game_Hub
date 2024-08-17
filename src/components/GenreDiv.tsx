@@ -12,10 +12,10 @@ import useGenre, { GenreResultProps } from "../hooks/useGenre";
 
 interface Props {
   handleGenre: (genre: GenreResultProps) => void;
-  selectedGenre: GenreResultProps | null;
+  selectedGenreId: number | null;
 }
 
-function GenreDiv({ selectedGenre, handleGenre }: Props) {
+function GenreDiv({ selectedGenreId, handleGenre }: Props) {
   const { data, isLoading, error } = useGenre();
 
   return (
@@ -29,6 +29,7 @@ function GenreDiv({ selectedGenre, handleGenre }: Props) {
             <Text>{error.message}</Text>
           </ListItem>
         )}
+
         {isLoading && <Spinner />}
         {data?.results.map((genre) => (
           <HStack key={genre.id}>
@@ -48,7 +49,7 @@ function GenreDiv({ selectedGenre, handleGenre }: Props) {
                 borderRadius={5}
                 width={"auto"}
                 padding={0.5}
-                bgColor={genre.id === selectedGenre?.id ? "gray.500" : "none"}
+                bgColor={genre.id === selectedGenreId ? "gray.500" : "none"}
                 fontSize={"15px"}
               >
                 {genre.name}
