@@ -1,22 +1,12 @@
 import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
-import GenreGrid from "./components/GenreGrid";
-import { useState } from "react";
-import Platform from "./components/Pltaform";
-import { PlatformProp } from "./hooks/usePlatform";
-import Sort from "./components/Sort";
 import GameHeading from "./components/GameHeading";
-
-export interface GameQuery {
-  genreId: number | null;
-  platformId: number | null;
-  ordering: string;
-  input: string;
-}
+import GenreGrid from "./components/GenreGrid";
+import NavBar from "./components/NavBar";
+import Platform from "./components/Pltaform";
+import Sort from "./components/Sort";
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
     <>
       <Grid
@@ -32,35 +22,21 @@ function App() {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar handle={(input) => setGameQuery({ ...gameQuery, input })} />
+          <NavBar />
         </GridItem>
 
         <GridItem area={"main"}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading />
           <HStack>
-            <Platform
-              selectPlatformFun={(platform: PlatformProp) => {
-                setGameQuery({ ...gameQuery, platformId: platform.id });
-              }}
-            />
-            <Sort
-              handleSort={(ordering) =>
-                setGameQuery({ ...gameQuery, ordering })
-              }
-            />
+            <Platform />
+            <Sort />
           </HStack>
-
-          <GameGrid gameQuery={gameQuery} />
+          <GameGrid />
         </GridItem>
 
         <Show above="lg">
           <GridItem padding={6} area={"side"}>
-            <GenreGrid
-              selectedGenreId={gameQuery.genreId}
-              shareGenre={(genre) =>
-                setGameQuery({ ...gameQuery, genreId: genre.id })
-              }
-            />
+            <GenreGrid />
           </GridItem>
         </Show>
       </Grid>

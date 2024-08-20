@@ -1,16 +1,15 @@
 import { Button, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
-import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
 import GameCard from "./GameCard";
 import LoadSkeleton from "./LoadSkeleton";
 import StyleBox from "./StyleBox";
 
-interface Props {
-  gameQuery: GameQuery;
-}
+// interface Props {
+//   gameQuery: GameQuery;
+// }
 
-function GameGrid({ gameQuery }: Props) {
+function GameGrid() {
   const {
     data,
     error,
@@ -18,7 +17,7 @@ function GameGrid({ gameQuery }: Props) {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useGame(gameQuery);
+  } = useGame();
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
@@ -42,8 +41,8 @@ function GameGrid({ gameQuery }: Props) {
             </StyleBox>
           ))}
 
-        {data?.pages.map((page) => (
-          <React.Fragment>
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
             {page.results.map((game) => (
               <StyleBox key={game.id}>
                 <GameCard game={game} key={game.id} />

@@ -9,14 +9,19 @@ import {
 } from "@chakra-ui/react";
 import imageUrl from "../services/imageUrl";
 import useGenre, { GenreResultProps } from "../hooks/useGenre";
+import useGameStore from "../Zstore/store";
 
-interface Props {
-  handleGenre: (genre: GenreResultProps) => void;
-  selectedGenreId: number | null;
-}
+// interface Props {
+//   handleGenre: (genre: GenreResultProps) => void;
+//   selectedGenreId?: number;
+// }
 
-function GenreDiv({ selectedGenreId, handleGenre }: Props) {
+function GenreDiv() {
+
+// { selectedGenreId, handleGenre }: Props
   const { data, isLoading, error } = useGenre();
+  const genreId = useGameStore((select) => select.gameQuery.genreId);
+  const setGenreId = useGameStore((select) => select.setGenreId);
 
   return (
     <div>
@@ -41,7 +46,10 @@ function GenreDiv({ selectedGenreId, handleGenre }: Props) {
             />
             <ListItem
               cursor={"pointer"}
-              onClick={() => handleGenre(genre)}
+              onClick={
+                () => setGenreId(genre.id)
+                // handleGenre(genre)
+              }
               paddingY={"10px"}
               key={genre.id}
             >
@@ -49,7 +57,7 @@ function GenreDiv({ selectedGenreId, handleGenre }: Props) {
                 borderRadius={5}
                 width={"auto"}
                 padding={0.5}
-                bgColor={genre.id === selectedGenreId ? "gray.500" : "none"}
+                bgColor={genre.id === genreId ? "gray.500" : "none"}
                 fontSize={"15px"}
               >
                 {genre.name}

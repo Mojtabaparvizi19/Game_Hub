@@ -1,8 +1,8 @@
-import { GameQuery } from "../App";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ApiRequest from "../services/apiClient";
 import { DataProps } from "../services/apiClient";
 import ms from "ms";
+import useGameStore from "../Zstore/store";
 
 export interface ResultProp {
   metacritic: number;
@@ -18,9 +18,10 @@ export interface ParentProps {
   name: string;
   slug: string;
 }
+const request = new ApiRequest<ResultProp>("/games");
+function useGame() {
+  const gameQuery = useGameStore((s) => s.gameQuery);
 
-function useGame(gameQuery: GameQuery) {
-  const request = new ApiRequest<ResultProp>("/games");
   return useInfiniteQuery<DataProps<ResultProp>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>

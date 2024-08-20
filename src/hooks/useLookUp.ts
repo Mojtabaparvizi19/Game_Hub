@@ -1,12 +1,14 @@
-import { GameQuery } from "../App";
+// import { GameQuery } from "../App";
+import useGameStore from "../Zstore/store";
 import useGenre from "./useGenre";
 import usePlatform from "./usePlatform";
 
-interface Props {
-  gameQuery: GameQuery;
-}
+// interface Props {
+//   gameQuery: GameQuery;
+// }
 
-function useLookUp({ gameQuery }: Props) {
+function useLookUp() {
+  const gameQuery = useGameStore((s) => s.gameQuery);
   const { data: platforms } = usePlatform();
   const { data: genres } = useGenre();
 

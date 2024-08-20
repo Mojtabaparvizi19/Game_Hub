@@ -1,13 +1,16 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import { useState } from "react";
+import useGameStore from "../Zstore/store";
 
-interface Props {
-  handleSort: (value: string) => void;
-}
+// interface Props {
+//   handleSort: (value: string) => void;
+// }
 
-function Sort({ handleSort }: Props) {
+function Sort() {
+// { handleSort }: Props
   const [name, setName] = useState("Relevence");
+  const setOrder = useGameStore((select) => select.setOrder);
   const order = [
     { value: "", label: "Relevence" },
     { value: "-name", label: "Name" },
@@ -26,7 +29,8 @@ function Sort({ handleSort }: Props) {
             <MenuItem
               onClick={() => {
                 setName(item.label);
-                handleSort(item.value);
+                setOrder(item.value);
+                // handleSort(item.value);
               }}
               key={item.value}
               value={item.value}

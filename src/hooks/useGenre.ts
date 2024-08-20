@@ -13,17 +13,12 @@ const request = new ApiRequest<GenreResultProps>("/genres").get();
 
 function useGenre() {
   // const queryClient = useQueryClient();
-  const { data, isLoading, error } = useQuery<
-    DataProps<GenreResultProps>,
-    Error
-  >({
+  return useQuery<DataProps<GenreResultProps>, Error>({
     queryKey: ["genres"],
     queryFn: () => request,
     staleTime: ms("24h"), // 24h
     initialData: genre,
   });
-
-  return { data, isLoading, error };
 }
 
 export default useGenre;
