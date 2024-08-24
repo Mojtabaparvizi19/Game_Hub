@@ -1,17 +1,19 @@
+import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
+import ExpandableText from "../components/ExpandableText";
 import useGameDetail from "../hooks/useGameDetail";
-import { Text, Heading, Box, Spinner } from "@chakra-ui/react";
 
 function GameDetailPage() {
   const { data: game, isLoading, error } = useGameDetail();
 
-  console.log(game?.description_raw);
   if (isLoading) return <Spinner />;
   if (error || !game) return <Text>{error.message}</Text>;
-
+  const description = game?.description_raw;
   return (
     <Box padding={10}>
-      <Heading>{game?.name}</Heading>
-      <Text>{game?.description_raw}</Text>
+      <Heading>{game.name}</Heading>
+      <Text>
+        <ExpandableText>{description}</ExpandableText>
+      </Text>
     </Box>
   );
 }
