@@ -4,6 +4,7 @@ import useGame from "../hooks/useGame";
 import GameCard from "./GameCard";
 import LoadSkeleton from "./LoadSkeleton";
 import StyleBox from "./StyleBox";
+import { Link } from "react-router-dom";
 
 // interface Props {
 //   gameQuery: GameQuery;
@@ -45,7 +46,9 @@ function GameGrid() {
           <React.Fragment key={index}>
             {page.results.map((game) => (
               <StyleBox key={game.id}>
-                <GameCard game={game} key={game.id} />
+                <Link to={`/games/${game.slug}`}>
+                  <GameCard game={game} key={game.id} />
+                </Link>
               </StyleBox>
             ))}
           </React.Fragment>

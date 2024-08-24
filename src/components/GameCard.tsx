@@ -1,12 +1,12 @@
 import { Card, CardBody, HStack, Heading, Image, Box } from "@chakra-ui/react";
-import { ResultProp } from "../hooks/useGame";
+import { GameProp } from "../hooks/useGame";
 import PlatFormIcon from "./PlatFormIcon";
 import CriticScore from "./CriticScore";
 import imageUrl from "../services/imageUrl";
 import Emoji from "./Emoji";
 
 interface Props {
-  game: ResultProp;
+  game: GameProp;
 }
 
 function GameCard({ game }: Props) {

@@ -7,7 +7,14 @@ interface Props {
 
 function StyleBox({ children }: Props) {
   return (
-    <Box overflow={"hidden"} borderRadius={"10px"}>
+    <Box
+      _hover={{
+        transform: "scale(1.01)",
+        transition: "transform 0.4s ease-in",
+      }}
+      overflow={"hidden"}
+      borderRadius={"10px"}
+    >
       {children}
     </Box>
   );

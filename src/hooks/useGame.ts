@@ -4,10 +4,11 @@ import { DataProps } from "../services/apiClient";
 import ms from "ms";
 import useGameStore from "../Zstore/store";
 
-export interface ResultProp {
+export interface GameProp {
   metacritic: number;
   id: number;
   name: string;
+  slug: string;
   background_image: string;
   parent_platforms: { platform: ParentProps }[];
   rating_top: number;
@@ -18,11 +19,11 @@ export interface ParentProps {
   name: string;
   slug: string;
 }
-const request = new ApiRequest<ResultProp>("/games");
+const request = new ApiRequest<GameProp>("/games");
 function useGame() {
   const gameQuery = useGameStore((s) => s.gameQuery);
 
-  return useInfiniteQuery<DataProps<ResultProp>, Error>({
+  return useInfiniteQuery<DataProps<GameProp>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       request.get({

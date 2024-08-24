@@ -5,7 +5,7 @@ export interface DataProps<T> {
   results: T[];
   next: string | null;
 }
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: "https://api.rawg.io/api",
   params: {
     key: "be04d384fdcd4072b4795af4f7d6a964",
@@ -22,6 +22,12 @@ class ApiRequest<T> {
   get = (config?: AxiosRequestConfig) => {
     return axiosInstance
       .get<DataProps<T>>(this.endpoint, { ...config })
+      .then((res) => res.data);
+  };
+
+  getDetail = (slug: number | string) => {
+    return axiosInstance
+      .get<T>(this.endpoint + "/" + slug)
       .then((res) => res.data);
   };
 }
