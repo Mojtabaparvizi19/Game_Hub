@@ -1,24 +1,17 @@
 import {
+  HStack,
+  Heading,
+  Image,
   List,
   ListItem,
-  Text,
-  HStack,
-  Image,
   Spinner,
-  Heading,
+  Text,
 } from "@chakra-ui/react";
-import imageUrl from "../services/imageUrl";
-import useGenre, { GenreResultProps } from "../hooks/useGenre";
 import useGameStore from "../Zstore/store";
-
-// interface Props {
-//   handleGenre: (genre: GenreResultProps) => void;
-//   selectedGenreId?: number;
-// }
+import useGenre from "../hooks/useGenre";
+import imageUrl from "../services/imageUrl";
 
 function GenreDiv() {
-
-// { selectedGenreId, handleGenre }: Props
   const { data, isLoading, error } = useGenre();
   const genreId = useGameStore((select) => select.gameQuery.genreId);
   const setGenreId = useGameStore((select) => select.setGenreId);
