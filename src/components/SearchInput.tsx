@@ -2,7 +2,6 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import useGameStore from "../Zstore/store";
-import { Outlet } from "react-router-dom";
 
 // interface Props {
 //   handleSearch: (input: string) => void;
