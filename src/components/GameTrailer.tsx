@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import useTrailer from "../hooks/useTrailer";
 
 interface Prop {
@@ -12,7 +13,9 @@ function GameTrailer({ id }: Prop) {
 
   if (error) throw error;
   return first ? (
-    <video src={first?.data[480]} poster={first?.preview} controls />
+    <Box>
+      <video src={first?.data[480]} poster={first?.preview} controls />
+    </Box>
   ) : null;
 }
 

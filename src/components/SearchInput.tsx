@@ -2,15 +2,13 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import useGameStore from "../Zstore/store";
-
-// interface Props {
-//   handleSearch: (input: string) => void;
-// }
+import { useNavigate } from "react-router-dom";
 
 function SearchInput() {
   // { handleSearch }: Props
   const ref = useRef<HTMLInputElement>(null);
   const setInput = useGameStore((select) => select.setInput);
+  const navigateTo = useNavigate();
   return (
     <>
       <form
@@ -19,6 +17,8 @@ function SearchInput() {
           if (ref.current !== null) {
             // handleSearch(ref.current.value);
             setInput(ref.current.value);
+            navigateTo("/");
+            ref.current.value = "";
           }
         }}
       >
