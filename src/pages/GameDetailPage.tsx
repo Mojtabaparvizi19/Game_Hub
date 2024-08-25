@@ -1,5 +1,6 @@
 import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
 import ExpandableText from "../components/ExpandableText";
+import GameAttribute from "../components/GameAttribute";
 import useGameDetail from "../hooks/useGameDetail";
 
 function GameDetailPage() {
@@ -14,6 +15,8 @@ function GameDetailPage() {
       <Text>
         <ExpandableText>{description}</ExpandableText>
       </Text>
+
+      <GameAttribute game={game} />
     </Box>
   );
 }

@@ -18,7 +18,7 @@ function ExpandableText({ children }: Props) {
           colorScheme={"yellow"}
           onClick={() => setExpanded(!isExpanded)}
         >
-          {isExpanded ? "Show less" : "Read all"}
+          {isExpanded ? "Show Less" : "Read All"}
         </Button>
       )}
     </div>

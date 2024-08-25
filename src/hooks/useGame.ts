@@ -3,15 +3,24 @@ import ApiRequest from "../services/apiClient";
 import { DataProps } from "../services/apiClient";
 import ms from "ms";
 import useGameStore from "../Zstore/store";
+import { GenreResultProps } from "./useGenre";
 
 export interface GameProp {
   metacritic: number;
   id: number;
   name: string;
   slug: string;
+  genres: GenreResultProps[];
   background_image: string;
   parent_platforms: { platform: ParentProps }[];
   rating_top: number;
+  publishers: Publisher[];
+  description_raw: string;
+}
+
+export interface Publisher {
+  id: number;
+  name: string;
 }
 
 export interface ParentProps {
