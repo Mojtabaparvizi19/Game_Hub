@@ -2,6 +2,7 @@ import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
 import ExpandableText from "../components/ExpandableText";
 import GameAttribute from "../components/GameAttribute";
 import useGameDetail from "../hooks/useGameDetail";
+import GameTrailer from "../components/GameTrailer";
 
 function GameDetailPage() {
   const { data: game, isLoading, error } = useGameDetail();
@@ -17,6 +18,7 @@ function GameDetailPage() {
       </Text>
 
       <GameAttribute game={game} />
+      <GameTrailer id={game.id} />
     </Box>
   );
 }

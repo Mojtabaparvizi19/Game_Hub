@@ -12,7 +12,7 @@ function GameAttribute({ game }: Prop) {
     <SimpleGrid columns={2}>
       <GameDetailAtrr term="Platfrom">
         {game.parent_platforms.map(({ platform }) => (
-          <Text>{platform.name}</Text>
+          <Text key={platform.id}>{platform.name}</Text>
         ))}
       </GameDetailAtrr>
 
