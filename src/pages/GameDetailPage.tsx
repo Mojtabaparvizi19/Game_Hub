@@ -3,6 +3,7 @@ import ExpandableText from "../components/ExpandableText";
 import GameAttribute from "../components/GameAttribute";
 import useGameDetail from "../hooks/useGameDetail";
 import GameTrailer from "../components/GameTrailer";
+import GameScreenShots from "../components/GameScreenShots";
 
 function GameDetailPage() {
   const { data: game, isLoading, error } = useGameDetail();
@@ -19,6 +20,7 @@ function GameDetailPage() {
 
       <GameAttribute game={game} />
       <GameTrailer id={game.id} />
+      <GameScreenShots gameId={game.id} />
     </Box>
   );
 }
